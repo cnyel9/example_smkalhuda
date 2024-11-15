@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Formulir Pendaftaran Siswa Baru SMK AL-HUDA Jati Agung - Membangun Generasi Unggul dan Berkarakter">
+    <title>Pendaftaran Siswa Baru - SMK AL-HUDA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/img/logo-alhuda.png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0066cc;
+            border-radius: 4px;
+        }
+
+        /* Dropdown Desktop */
+        .desktop-menu-item {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .desktop-menu-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .desktop-menu-item:hover::after {
+            width: 100%;
+        }
+        
+        /* Dropdown Desktop Submenu */
+        .desktop-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+        
+        .desktop-menu-group:hover .desktop-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .desktop-dropdown-item {
+            position: relative;
+            padding: 10px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .desktop-dropdown-item:hover {
+            background-color: #f0f0f0;
+            color: #0066cc;
+        }
+        
+        .desktop-dropdown-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 15px;
+            background-color: #0066cc;
+            transition: width 0.3s ease;
+        }
+        
+        .desktop-dropdown-item:hover::after {
+            width: calc(100% - 30px);
+        }
+        
+        /* Dropdown untuk mobile menu */
+        .group:hover .group-hover:block { display: block; }
+        
+        /* Background gradient */
+        .header-gradient {
+            background: linear-gradient(135deg, #0066cc, #00348c);
+        }
+    
+        /* Responsivitas Mobile */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+    
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+        /* Animasi underline untuk menu mobile */
+        .mobile-menu-item {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+    
+        .mobile-menu-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color : white;
+            transition: width 0.3s ease;
+        }
+    
+        .mobile-menu-item:hover::after {
+            width: 100%;
+        }
+    
+        /* Dropdown animasi */
+        .dropdown-submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+    
+        .group:hover .dropdown-submenu {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* Custom Select2 Styling */
+    .select2-container {
+        width: 100% !important;
+    }
+    
+    .select2-search__field {
+        width: 100% !important;
+    }
+
+    /* Pastikan dropdown bisa scroll */
+    .select2-results__options {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans overflow-x-hidden"> 
+    <!-- Top Bar --> 
+    <div class="bg-blue-900 text-white py-2"> 
+        <div class="container mx-auto flex justify-between px-4"> 
+            <div class="flex items-center space-x-4"> 
+                <i class="fas fa-phone"></i> 
+                <span>(0123) 456-7890</span> 
+                <i class="fas fa-envelope"></i> 
+                <span>info@smkalhuda.sch.id</span> 
+            </div> 
+            <div class="hidden md:flex space-x-3"> 
+                <a href="#" class="hover:text-blue-300">
+                    <i class="fab fa-facebook"></i>
+                </a> 
+                <a href="#" class="hover:text-blue-300">
+                    <i class="fab fa-instagram"></i>
+                </a> 
+            </div> 
+        </div> 
+    </div>
+
+    <!-- Header -->
+    <header class="header-gradient text-white py-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center space-x-4">
+                <img src="/img/logo-alhuda.png" alt="Logo Sekolah" class="w-20 h-20 rounded-full object-cover">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">SMK AL-HUDA Jati Agung</h1>
+                    <p class="text-xs md:text-sm mt-3">Membangun Generasi Unggul dan Berkarakter</p>
+                </div>
+            </div>
+            <nav class="hidden lg:flex space-x-6">
+                <a href="/index.html" class="desktop-menu-item hover:text-blue-200 transition">Beranda</a>
+                <div class="relative desktop-menu-group">
+                    <a href="#" class="desktop-menu-item hover:text-blue-200 transition">Profil</a>
+                    <div class="desktop-dropdown">
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Sejarah</span>
+                        </a>
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Visi & Misi</span>
+                        </a>
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Struktur Organisasi</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative desktop-menu-group">
+                    <a href="#" class="desktop-menu-item hover:text-blue-200 transition">Akademik</a>
+                    <div class="desktop-dropdown">
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Kurikulum</span>
+                        </a>
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Jadwal Pelajaran</span>
+                        </a>
+                        <a href="#" class="desktop-dropdown-item block">
+                            <span>Ekstrakurikuler</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="desktop-menu-item hover:text-blue-200 transition">Kontak</a>
+            </nav>
+            <button class="lg:hidden" id="mobile-menu-toggle">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-blue-700 text-white"> 
+        <nav class="container mx-auto py-4 space-y-3 pl-4"> 
+            <a href="/index.html" class="block mobile-menu-item">Beranda</a>
+            <div class="group">
+                <a href="#" class="block mobile-menu-item">Profil</a>
+                <div class="pl-4 mt-2 space-y-2 dropdown-submenu">
+                    <a href="#" class="block mobile-menu-item">Sejarah</a>
+                    <a href="#" class="block mobile-menu-item">Visi & Misi</a>
+                    <a href="#" class="block mobile-menu-item">Struktur Organisasi</a>
+                </div>
+            </div>
+            <div class="group">
+                <a href="#" class="block mobile-menu-item">Akademik</a>
+                <div class="pl-4 mt-2 space-y-2 dropdown-submenu">
+                    <a href="#" class="block mobile-menu-item">Kurikulum</a>
+                    <a href="#" class="block mobile-menu-item">Jadwal Pelajaran</a>
+                    <a href="#" class="block mobile-menu-item">Ekstrakurikuler</a>
+                </div>
+            </div>
+            <a href="#" class="block mobile-menu-item">Kontak</a>
+        </nav>
+    </div>
+
+    <!-- Formulir Pendaftaran -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+            <!-- Header Pendaftaran -->
+            <div class="bg-blue-600 text-white p-6">
+                <h1 class="text-2xl font-bold">Formulir Pendaftaran Siswa/i Baru</h1>
+                <p class="text-blue-100">SMK AL-HUDA Jati Agung Tahun Ajaran 2024/2025</p>
+            </div>
+
+            <!-- Formulir -->
+            <form id="pendaftaranForm" class="p-6" onsubmit="return validateForm()">
+                <!-- Informasi Pribadi -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-blue-800 border-b pb-2 mb-4">Informasi Pribadi</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Nama Lengkap:</label>
+                            <input type="text" name="namaLengkap" class="form-input" placeholder="Nama Lengkap Sesuai Ijazah" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Jenis Kelamin:</label>
+                            <select name="jenisKelamin" class="form-input" required>
+                                <option value=""></option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Tempat Lahir:</label>
+                            <input type="text" name="tempatLahir" class="form-input" placeholder="Kota Kelahiran" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Tanggal Lahir:</label>
+                            <input type="date" name="tanggalLahir" class="form-input" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Agama:</label>
+                            <select name="agama" class="form-input" required>
+                                <option value=""></option>
+                                <option value="Islam">Islam</option>
+                                <option value="Kristen">Kristen</option>
+                                <option value="Katholik">Katholik</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Buddha">Buddha</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Nomor Telepon:</label>
+                            <input type="tel" name="nomorTelepon" class="form-input" placeholder="Nomor HP Aktif" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informasi Alamat -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-blue-800 border-b pb-2 mb-4">Informasi Alamat</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="form-label">Alamat Lengkap:</label>
+                            <textarea name="alamatLengkap" class="form-input" placeholder="Alamat Rumah Lengkap" rows="3" required></textarea>
+                        </div>
+                        <div>
+                            <label class="form-label">Provinsi</label>
+                            <select name="provinsi" id="provinsi" class="form-input" required>
+                                <option value="">Pilih Provinsi</option>
+                                <!-- Provinsi akan diisi secara dinamis -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Kabupaten/Kota</label>
+                            <select name="kabupatenKota" id="kabupatenKota" class="form-input" required>
+                                <option value="">Pilih Kabupaten /Kota</option>
+                                <!-- Kabupaten akan diisi secara dinamis -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informasi Sekolah Asal -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-blue-800 border-b pb-2 mb-4">Informasi Sekolah Asal</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Nama Sekolah Asal:</label>
+                            <input type="text" name="namaSekolahAsal" class="form-input" placeholder="Nama SMP/MTs" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Tahun Lulus:</label>
+                            <select name="tahunLulus" class="form-input" required>
+                                <option value=""></option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2022">2021</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pilihan Jurusan -->
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-blue-800 border-b pb-2 mb-4">Pilihan Jurusan</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Jurusan:</label>
+                            <select name="jurusanPertama" class="form-input" required>
+                                <option value=""></option>
+                                <option value="Teknik Kendaraan Ringan">Teknik Kendaraan Ringan (TKR)</option>
+                                <option value="Teknik Sepeda Motor">Teknik Sepeda Motor (TSM)</option>
+                                <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan (TKJ)</option>
+                                <option value="Farmasi">Farmasi</option>
+                                <option value="Asisten Keperawatan">Asisten Keperawatan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tombol Kirim -->
+                <div class="mb-6">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">Kirim Pendaftaran</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-8 mt-8">
+        <div class="container mx-auto grid md:grid-cols-3 gap-6 px-4">
+            <div>
+                <h3 class="font-bold mb-4">Kontak Kami</h3>
+                <p class="flex items-center mb-2">
+                    <i class="fas fa-map-marker-alt mr-3 text-white-500"></i>
+                    Jl. Pesantren Al Huda Desa Jatimulyo, Kec. Jati Agung
+                </p>
+                <p class="flex items-center mb-2">
+                    <i class="fas fa-phone mr-3 text-white-500"></i>
+                    (0123) 456-7890
+                </p>
+                <p class="flex items-center">
+                    <i class="fas fa-envelope mr-3 text-white-500"></i>
+                    info@smkalhuda.sch.id
+                </p>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Tautan Cepat</h3>
+                <ul>
+                    <li><a href="#" class="hover:text-blue-200">Profil Sekolah</a></li>
+                    <li><a href="#" class="hover:text-blue-200">Struktur Organisasi</a></li>
+                    <li><a href="#" class="hover:text-blue-200">Galeri</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Media Sosial</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-2xl hover:text-blue-200"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-2xl hover:text-blue-200"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-2xl hover:text-blue-200"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    // Data Provinsi dan Kabupaten/Kota Indonesia
+    const wilayahIndonesia = {
+        "Aceh": ["Banda Aceh", "Langsa", "Lhokseumawe", "Sabang", "Subulussalam", "Aceh Barat", "Aceh Barat Daya", "Aceh Besar"],
+        "Sumatera Utara": ["Medan", "Binjai", "Padang Sidempuan", "Pematangsiantar", "Tanjungbalai", "Tebing Tinggi", "Asahan", "Dairi"],
+        "Sumatera Barat": ["Padang", "Bukittinggi", "Padangpanjang", "Pariaman", "Solok", "Agam", "Lima Puluh Kota"],
+        "DKI Jakarta": ["Jakarta Pusat", "Jakarta Utara", "Jakarta Barat", "Jakarta Selatan", "Jakarta Timur"],
+        "Jawa Barat": ["Bandung", "Bogor", "Cimahi", "Depok", "Sukabumi", "Tasikmalaya", "Bekasi"],
+        "Jawa Tengah": ["Semarang", "Surakarta", "Pekalongan", "Tegal", "Cilacap", "Purwokerto"],
+        "Jawa Timur": ["Surabaya", "Malang", "Kediri", "Mojokerto", "Madiun", "Blitar"],
+        "Bali": ["Denpasar", "Badung", "Gianyar", "Tabanan", "Klungkung"],
+        "Yogyakarta": ["Yogyakarta", "Sleman", "Bantul", "Kulon Progo"],
+        "Lampung": ["Bandar Lampung", "Lampung Selatan", "Lampung Utara"],
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Isi dropdown provinsi
+        const provinsiSelect = document.getElementById('provinsi');
+        const kabupatenSelect = document.getElementById('kabupatenKota');
+
+        // Tambahkan opsi default
+        provinsiSelect.innerHTML = '<option value="">Pilih Provinsi</option>';
+        
+        // Isi provinsi
+        Object.keys(wilayahIndonesia).forEach(provinsi => {
+            const option = document.createElement('option');
+            option.value = provinsi;
+            option.textContent = provinsi;
+            provinsiSelect.appendChild(option);
+        });
+
+        // Event listener untuk perubahan provinsi
+        provinsiSelect.addEventListener('change', function() {
+            kabupatenSelect.innerHTML = '<option value="">Pilih Kabupaten/Kota</option>';
+            
+            // Dapatkan provinsi yang dipilih
+            const selectedProvinsi = this.value;
+
+            // Jika provinsi dipilih, isi kabupaten
+            if (selectedProvinsi && wilayahIndonesia[selectedProvinsi]) {
+                wilayahIndonesia[selectedProvinsi].forEach(kabupaten => {
+                    const option = document.createElement('option');
+                    option.value = kabupaten;
+                    option.textContent = kabupaten;
+                    kabupatenSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Inisialisasi Select2
+        if (window.jQuery && $.fn.select2) {
+            $('#provinsi, #kabupatenKota').select2({
+                placeholder: "Pilih...",
+                allowClear: true
+            });
+        }
+    });
+
+    // Validasi
+    function validateForm() {
+        const namaLengkap = document.querySelector('input[name="namaLengkap"]').value.trim();
+        const jenisKelamin = document.querySelector('select[name="jenisKelamin"]').value;
+        const nomorTelepon = document.querySelector('input[name="nomorTelepon"]').value.trim();
+
+        // Validasi nama
+        if (namaLengkap.length < 3) {
+            alert('Nama lengkap minimal 3 karakter');
+            return false;
+        }
+
+        // Validasi jenis kelamin
+        if (!jenisKelamin) {
+            alert('Pilih jenis kelamin');
+            return false;
+        }
+
+        // Validasi nomor telepon (contoh: minimal 10 digit)
+        if (!/^\d{10,}$/.test(nomorTelepon)) {
+            alert('Nomor telepon tidak valid');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Tambahkan event listener untuk form
+    document.getElementById('pendaftaranForm').addEventListener('submit', function(e) {
+        if (!validateForm()) {
+            e.preventDefault(); // Mencegah pengiriman form jika validasi gagal
+        }
+    });
+
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Dropdown toggle untuk mobile
+    const dropdownGroups = document.querySelectorAll('.group');
+
+    dropdownGroups.forEach(group => {
+        const mainLink = group.querySelector('a:first-child');
+        const submenu = group.querySelector('.dropdown-submenu');
+
+        mainLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            submenu.classList.toggle('max-h-0');
+            submenu.classList.toggle('opacity-0');
+            submenu.classList.toggle('max-h-screen');
+            submenu.classList.toggle('opacity-100');
+        });
+    });
+</script>
+</body>
+</html>
